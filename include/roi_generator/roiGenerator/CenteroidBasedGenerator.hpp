@@ -6,18 +6,21 @@
 #define PROJECT_CENTEROIDBASEDGENERATOR_HPP
 
 #include "CenteroidBasedGenerator.hpp"
-#include "RoiGenerator.hpp"
+#include "AbstractRoiGenerator.hpp"
 
 namespace roi_generator {
-class CenteroidBasedGenerator : RoiGenerator {
+namespace roiGenerator {
+
+class CenteroidBasedGenerator : public AbstractRoiGenerator {
 public:
-  CenteroidBasedGenerator(pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud, Eigen::Isometry3d& pointCloudOrigin, double threshold);
-  virtual Roi generate();
+  CenteroidBasedGenerator(double threshold);
+
+  Roi generate(pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud) override;
 
 private:
-  pcl::PointCloud<pcl::PointXYZRGB> mCloud;
   double mThreshold;
-};
-
+}
+;
+}
 }
 #endif //PROJECT_CENTEROIDBASEDGENERATOR_HPP

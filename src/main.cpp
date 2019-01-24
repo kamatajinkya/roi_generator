@@ -2,6 +2,8 @@
 // Created by ajinkya on 1/23/19.
 //
 
+#include <memory>
+
 #include <ros/ros.h>
 #include <ros/console.h>
 #include <sensor_msgs/PointCloud2.h>
@@ -12,13 +14,31 @@
 #include <tf_conversions/tf_eigen.h>
 #include <pcl_conversions/pcl_conversions.h>
 #include <pcl/point_cloud.h>
+#include <pcl_ros/transforms.h>
 
-#include "roi_generator/CenteroidBasedGenerator.hpp"
+#include "roi_generator/roiGenerator/CenteroidBasedGenerator.hpp"
+#include "roi_generator/roiGenerator/ConcreteRoiGenerator.hpp"
+#include "roi_generator/floorRemover/NaiveFloorRemover.hpp"
+#include "roi_generator/workspaceCropper/NaiveWorkspaceCropper.hpp"
+
+using roi_generator::floorRemover::NaiveFloorRemover;
+using roi_generator::roiGenerator::CenteroidBasedGenerator;
+using roi_generator::roiGenerator::ConcreteRoiGenerator;
+using roi_generator::workspaceCropper::NaiveWorkspaceCropper;
+
 
 int main(int argc, char** argcv)
 {
   ros::init(argc, argcv, "roi_generator_node");
   ros::NodeHandle nh;   //TODO: Deal with namespace before deploy/release
+
+  ROS_INFO("Setting up Node");
+  auto centroiodBasedGenertor = std::make_shared<CenteroidBasedGenerator>(0.01);
+  auto naiveFloorRemover = std::make_shared<NaiveFloorRemover>(-0.05);
+  auto naiveWorkspaceCropper = std::make_shared<NaiveWorkspaceCropper>();
+  ConcreteRoiGenerator roiGenerator(centroiodBasedGenertor, naiveFloorRemover, naiveWorkspaceCropper);
+
+  ROS_INFO("Done Setting up Node");
 
   ROS_INFO("Recieving Point Cloud");
 
@@ -52,9 +72,10 @@ int main(int argc, char** argcv)
   Eigen::Isometry3d mapToCloudFrame;
   tf::transformTFToEigen(transform, mapToCloudFrame);
 
+  pcl::transformPointCloud(cloud, cloud, mapToCloudFrame.matrix());
+
   ROS_INFO("Generating ROI");
-  roi_generator::CenteroidBasedGenerator roiGenerator(cloud.makeShared(), mapToCloudFrame, 0.01);
-  auto roi = roiGenerator.generate();
+  auto roi = roiGenerator.generate(cloud.makeShared());
   ROS_INFO("ROI Generated");
 
   ROS_INFO("Publishing ROI Marker");
