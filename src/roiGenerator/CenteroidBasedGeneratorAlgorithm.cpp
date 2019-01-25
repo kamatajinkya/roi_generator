@@ -2,20 +2,20 @@
 // Created by ajinkya on 1/23/19.
 //
 
-#include "roi_generator/roiGenerator/CenteroidBasedGenerator.hpp"
+#include "roi_generator/roiGenerator/CenteroidBasedGeneratorAlgorithm.hpp"
 #include <memory>
 #include <pcl/common/centroid.h>
 
 namespace roi_generator {
 namespace roiGenerator {
 
-CenteroidBasedGenerator::CenteroidBasedGenerator(double threshold)
+CenteroidBasedGeneratorAlgorithm::CenteroidBasedGeneratorAlgorithm(double threshold)
 : mThreshold(threshold)
 {
   //Do Nothing
 }
 
-Roi CenteroidBasedGenerator::generate(pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud) {
+Roi CenteroidBasedGeneratorAlgorithm::generate(pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud) {
 
   Eigen::Vector4d centroidPoint;
   pcl::compute3DCentroid<pcl::PointXYZRGB, double>(*cloud, centroidPoint);

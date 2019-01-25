@@ -5,15 +5,15 @@
 #ifndef PROJECT_CENTEROIDBASEDGENERATOR_HPP
 #define PROJECT_CENTEROIDBASEDGENERATOR_HPP
 
-#include "CenteroidBasedGenerator.hpp"
+#include "CenteroidBasedGeneratorAlgorithm.hpp"
 #include "AbstractRoiGenerator.hpp"
 
 namespace roi_generator {
 namespace roiGenerator {
 
-class CenteroidBasedGenerator : public AbstractRoiGenerator {
+class CenteroidBasedGeneratorAlgorithm : public AbstractRoiGenerator {
 public:
-  CenteroidBasedGenerator(double threshold);
+  CenteroidBasedGeneratorAlgorithm(double threshold);
 
   Roi generate(pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud) override;
 

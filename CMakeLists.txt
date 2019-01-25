@@ -134,8 +134,15 @@ include_directories(
   src/main.cpp
   src/floorRemover/NaiveFloorRemover.cpp
   src/roiGenerator/ConcreteRoiGenerator.cpp
-  src/roiGenerator/CenteroidBasedGenerator.cpp
+         src/roiGenerator/CenteroidBasedGeneratorAlgorithm.cpp
   src/workspaceCropper/NaiveWorkspaceCropper.cpp
+  src/debugUtils/RVizRoiVisualizer.cpp
+  src/pointCloudReceiver/RosPointCloudReceiver.cpp
+  src/pointCloudReceiver/PCDPointCloudReceiver.cpp
+  src/debugUtils/VisualPointCloudDebugger.cpp
+  src/debugUtils/LogPointCloudDebugger.cpp
+  src/debugUtils/NullPointCloudDebugger.cpp
+  src/debugUtils/CompositePointCloudDebugger.cpp
   )
 
 ## Rename C++ executable without prefix
