@@ -6,13 +6,17 @@
 #define PROJECT_NAIVEWORKSPACECROPPER_HPP
 
 #include "AbstractWorkspaceRemover.hpp"
+#include "roi_generator/Roi.hpp"
 
 namespace roi_generator {
 namespace workspaceCropper {
 
 class NaiveWorkspaceCropper : public AbstractWorkspaceCropper {
 public:
+  NaiveWorkspaceCropper(roi_generator::Roi roi);
   void crop(pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud) override;
+private:
+  roi_generator::Roi mRoi;
 };
 
 }

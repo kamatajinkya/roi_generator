@@ -11,6 +11,15 @@ namespace roi_generator {
 
 class Roi {
 public:
+
+  Roi (double x, double y, double z, double length, double width, double height) :
+    mX(x),
+    mY(y),
+    mZ(z),
+    mLength(length),
+    mWidth(width),
+    mHeight(height){}
+
   Roi() :
     mX(0),
     mY(0),
