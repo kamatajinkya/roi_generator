@@ -7,13 +7,15 @@
 
 #include <pcl/point_types.h>
 #include <pcl/point_cloud.h>
+#include "roi_generator/Roi.hpp"
 
 namespace roi_generator{
 namespace debugUtils{
 
 class AbstractPointCloudDebugger {
 public:
-  virtual void debug(pcl::PointCloud<pcl::PointXYZRGB>& cloud, std::string msg) = 0;
+  virtual void debugCloud(pcl::PointCloud<pcl::PointXYZRGB> &cloud, std::string msg) = 0;
+  virtual void debugROI(Roi& roi, pcl::PointCloud<pcl::PointXYZRGB> &cloud, std::string msg) = 0;
 };
 
 }

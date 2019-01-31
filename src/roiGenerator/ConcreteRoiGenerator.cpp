@@ -26,21 +26,23 @@ Roi ConcreteRoiGenerator::generate(pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud)
   pcl::PointCloud<pcl::PointXYZRGB>::Ptr saved_cloud(new pcl::PointCloud<pcl::PointXYZRGB>);
 
   *saved_cloud = *cloud;
-  mDebugger->debug(*saved_cloud, "Input_Cloud");
+  mDebugger->debugCloud(*saved_cloud, "Input_Cloud");
 
   ROS_INFO("Started Cropping Workspace");
   mWorkspaceCropper->crop(saved_cloud);
-  mDebugger->debug(*saved_cloud, "Cropped_Cloud");
+  mDebugger->debugCloud(*saved_cloud, "Cropped_Cloud");
   ROS_INFO("Done Cropping Workspace");
 
   ROS_INFO("Started to Remove Floor");
   mFloorRemover->remove(saved_cloud);
-  mDebugger->debug(*saved_cloud, "Floor_Subtracted_Cloud");
+  mDebugger->debugCloud(*saved_cloud, "Floor_Subtracted_Cloud");
   ROS_INFO("Done Removing Floor");
 
   ROS_INFO("Started Selecting ROI");
   auto roi = mRoiGenerationAlgo->generate(saved_cloud);
+  mDebugger->debugROI(roi, *saved_cloud, "Roi_Generated");
   ROS_INFO("Done Removing Floor");
+
 
   return roi;
 }

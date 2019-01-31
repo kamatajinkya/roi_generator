@@ -13,7 +13,11 @@ NullPointCloudDebugger::NullPointCloudDebugger() {
 }
 
 
-void NullPointCloudDebugger::debug(pcl::PointCloud<pcl::PointXYZRGB> &cloud, std::string msg) {
+void NullPointCloudDebugger::debugCloud(pcl::PointCloud<pcl::PointXYZRGB> &cloud, std::string msg) {
+  //Do Nothing
+}
+
+void NullPointCloudDebugger::debugROI(Roi &roi, pcl::PointCloud<pcl::PointXYZRGB> &cloud, std::string msg) {
   //Do Nothing
 }
 

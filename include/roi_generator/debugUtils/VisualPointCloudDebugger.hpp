@@ -14,7 +14,9 @@ class VisualPointCloudDebugger : public AbstractPointCloudDebugger {
 public:
   VisualPointCloudDebugger(std::string prefix);
 
-  void debug(pcl::PointCloud<pcl::PointXYZRGB> &cloud, std::string msg) override;
+  void debugCloud(pcl::PointCloud<pcl::PointXYZRGB> &cloud, std::string msg) override;
+
+  void debugROI(Roi &roi, pcl::PointCloud<pcl::PointXYZRGB> &cloud, std::string msg) override;
 
 private:
   std::string mPrefix;

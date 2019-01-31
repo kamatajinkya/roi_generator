@@ -12,6 +12,7 @@
 #include <pcl/filters/extract_indices.h>
 
 #include "roi_generator/debugUtils/VisualPointCloudDebugger.hpp"
+#include "roi_generator/debugUtils/NullPointCloudDebugger.hpp"
 
 namespace roi_generator {
 namespace utils {
@@ -42,7 +43,8 @@ std::vector<std::pair<pcl::PointCloud<pcl::PointXYZRGB>::Ptr, pcl::ModelCoeffici
   seg.setInputCloud (cloud);
 
 
-  debugUtils::VisualPointCloudDebugger visualPointCloudDebugger("RansacBasedSegmentation");
+  //debugUtils::VisualPointCloudDebugger visualPointCloudDebugger("RansacBasedSegmentation");
+  debugUtils::NullPointCloudDebugger visualPointCloudDebugger();
 
   pcl::ExtractIndices<pcl::PointXYZRGB> extract;
   int i = 0;
@@ -69,7 +71,7 @@ std::vector<std::pair<pcl::PointCloud<pcl::PointXYZRGB>::Ptr, pcl::ModelCoeffici
     segmentList.emplace_back(std::pair<pcl::PointCloud<pcl::PointXYZRGB>::Ptr,
                           pcl::ModelCoefficients>(segmentedCloud,*coefficients));
 
-    visualPointCloudDebugger.debug(*segmentedCloud, std::string("Segment : ") + std::to_string(i));
+//    visualPointCloudDebugger.debug(*segmentedCloud, std::string("Segment : ") + std::to_string(i));
 
     extract.setNegative(true);
     extract.filter(*filteredCloudPtr);

@@ -12,10 +12,14 @@ namespace debugUtils{
 
 class LogPointCloudDebugger : public AbstractPointCloudDebugger {
 public:
-  LogPointCloudDebugger(std::string filePrefix = std::string(""));
-  void debug(pcl::PointCloud<pcl::PointXYZRGB>& cloud, std::string msg) override;
+  LogPointCloudDebugger(std::string fileLocation = std::string(""));
+  void debugCloud(pcl::PointCloud<pcl::PointXYZRGB> &cloud, std::string msg) override;
+
+  void debugROI(Roi &roi, pcl::PointCloud<pcl::PointXYZRGB> &cloud, std::string msg) override;
+
 private:
-  std::string mFilePrefix;
+  std::string mFileLocation;
+  std::size_t mStep;
 };
 
 

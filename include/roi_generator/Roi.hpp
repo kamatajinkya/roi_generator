@@ -6,6 +6,7 @@
 #define PROJECT_ROI_HPP
 
 #include <Eigen/Dense>
+#include <string>
 
 namespace roi_generator {
 
@@ -42,6 +43,17 @@ public:
   double& length() {return mLength;}
   double& width() {return mWidth;}
   double& height() {return mHeight;}
+
+  std::string toString()
+  {
+    std::string comma(", ");
+    return std::to_string(mX) + comma
+         + std::to_string(mY) + comma
+         + std::to_string(mZ) + comma
+         + std::to_string(mLength) + comma
+         + std::to_string(mWidth) + comma
+         + std::to_string(mHeight) + std::string(";");
+  }
 
 private:
   double mX,mY,mZ,mLength,mWidth,mHeight;

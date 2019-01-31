@@ -143,9 +143,10 @@ include_directories(
   src/debugUtils/LogPointCloudDebugger.cpp
   src/debugUtils/NullPointCloudDebugger.cpp
   src/debugUtils/CompositePointCloudDebugger.cpp
-  src/roiGenerator/SegmentationBasedGenerator.cpp
+  src/roiGenerator/SegmentationBasedGeneratorAlgorithm.cpp
   src/utils/RansacBasedSegmentation.cpp
   src/utils/utils.cpp
+  src/roiValidator/NullRoiValidator.cpp
   )
 
 ## Rename C++ executable without prefix

@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <string>
+#include <initializer_list>
 #include "AbstractPointCloudDebugger.hpp"
 
 namespace roi_generator {
@@ -14,9 +15,11 @@ namespace debugUtils {
 
 class CompositePointCloudDebugger : public AbstractPointCloudDebugger {
 public:
-  CompositePointCloudDebugger(::std::vector<::std::shared_ptr<AbstractPointCloudDebugger>> debuggers);
+  explicit CompositePointCloudDebugger(const std::initializer_list<std::shared_ptr<AbstractPointCloudDebugger>>& debugger_list);
 
-  void debug(pcl::PointCloud<pcl::PointXYZRGB>& cloud, ::std::string msg) override;
+  void debugCloud(pcl::PointCloud<pcl::PointXYZRGB> &cloud, ::std::string msg) override;
+
+  void debugROI(Roi &roi, pcl::PointCloud<pcl::PointXYZRGB> &cloud, std::string msg) override;
 
 private:
   ::std::vector<::std::shared_ptr<AbstractPointCloudDebugger>> mDebugger_list;
